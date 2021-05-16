@@ -111,6 +111,7 @@ public:
 		* \brief метод изменения положения рамки по y с проверкой на границы экрана
 		* \param y
 		*/
+	
 	void MoveWindowY(const int y) {
 
 	}
