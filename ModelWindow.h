@@ -1,127 +1,106 @@
-#include <iostream>
+#pragma once
+#include <sstream>
+/**
+ * \brief Класс ModelWindow для работы с окнами
+ */
+class ModelWindow
+{
+private:
+	std::string title;
+	unsigned int _x;
+	unsigned int _y;
+	unsigned int height;
+	unsigned int width;
+	std::string color;
+	bool show, border;
 
-using namespace std;
+	static constexpr int MAX_HEIGHT = 1080;
+	static constexpr int MAX_WIDTH = 1920;
 
-class ModelWindow {
+	std::string getTitle() const;
+	unsigned int getX() const;
+	unsigned int getY() const;
+	unsigned int getHeight() const;
+	unsigned int getWidth() const;
+	std::string getColor() const;
+	bool getShow() const;
+	bool getBorder() const;
+
 public:
 	/**
-		* \brief конструктор по умолчанию
-		*/
-	ModelWindow() {
-
-	}
+	* \brief Конструктор по умолчанию
+	*/
+	ModelWindow() = default;
 	/**
-		* \brief конструктор формы
-		* \param heading заголовок, x , y height высота, length длина, color цвет, stateVisibility состояни видимости, stateFrame состояние окна
-		*/
-	ModelWindow(string heading, int x, int y, int height, int length, string color, string stateVisibility, string stateFrame) {
-
-	}
+	* \brief Параметризованный конструктор
+	*/
+	ModelWindow(const std::string title, const unsigned int x, const unsigned int y, const unsigned int width, const unsigned int height, const std::string colorCode= "000000", const bool show = true, const bool border = true);
 	/**
-		* \brief деструктор по умолчанию
-		*/
-	~ModelWindow() {
+	* \brief Деструктор по умолчанию
+	*/
+	~ModelWindow() = default;	
 
-	}
 	/**
-		* \brief геттер
-		* \return Возвращает x
-		*/
-	int GetX() const {
-
-	}
+	* \brief сеттер заголовка
+	*/
+	void setTitle(const std::string title);
 	/**
-		* \brief геттер
-		* \return Возвращает y
-		*/
-	int GetY() const {
-
-	}
+	* \brief сеттер координаты х
+	*/
+	void setX(const unsigned int x);
 	/**
-		* \brief геттер
-		* \return Возвращает Height
-		*/
-	int GetHeight() const {
-
-	}
+	* \brief сеттер координаты у
+	*/
+	void setY(const unsigned int y);
 	/**
-		* \brief геттер
-		* \return Возвращает Length
-		*/
-	int GetLength() const {
-
-	}
+	* \brief сеттер высоты
+	*/
+	void setHeight(const unsigned int height);
 	/**
-		* \brief геттер
-		* \return Возвращает Heading
-		*/
-	string GetHeading() const {
-
-	}
+	* \brief сеттер ширины
+	*/
+	void setWidth(const unsigned width);
 	/**
-		* \brief геттер
-		* \return Возвращает Color
-		*/
-	string GetColor() const {
-
-	}
+	* \brief сеттер цвета окна
+	*/
+	void setColor(const std::string colorCode);
 	/**
-		* \brief геттер
-		* \return Возвращает StateVisibility
-		*/
-	string GetStateVisibility() const {
-
-	}
+	* \brief сеттер установки видимости
+	*/
+	void setShow(const bool show);
 	/**
-		* \brief геттер
-		* \return Возвращает StateFrame
-		*/
-	string GetStateFrame() const {
-
-	}
-	/**
-		* \brief сеттер цвета
-		* \param color
-		*/
-	void SetColor(const string color) {
-
-	}
-	/**
-		* \brief сеттер видимости
-		* \param color
-		*/
-	void SetStateVisibility(const string stateVisibility) {
-
-	}
-	/**
-		* \brief сеттер рамки
-		* \param StateFrame
-		*/
-	void SetStateFrame(const string stateFrame) {
-
-	}
-	/**
-		* \brief метод изменения положения рамки по x с проверкой на границы экрана
-		* \param x
-		*/
-	void MoveWindowX(const int x) {
-
-	}
-	/**
-		* \brief метод изменения положения рамки по y с проверкой на границы экрана
-		* \param y
-		*/
+	* \brief сеттер рамки
+	*/
+	void setBorder(const bool border);
 	
-	void MoveWindowY(const int y) {
+	/**
+	* \brief метод сдвига окна по горизонтали
+	*/
+	void moveHorisontal(const int delta=0);
+	/**
+	* \brief метод сдвига окна по вертикали
+	*/
+	void moveVertical(const int delta=0);
+	/**
+	* \brief смена размеров окна
+	*/
+	void changeFormat(const unsigned int height, const unsigned int width);
+	/**
+	* \brief смена режима видимости
+	*/
+	void changeVisible(const bool visible);
+	/**
+	* \brief чекер режима видимости
+	*/
+	bool isVisible() const;
 
-	}
-private:
-	string heading;
-	int x;
-	int y;
-	int height;
-	int length;
-	string color;
-	string stateVisibility;
-	string stateFrame;
+	/**
+	* \brief Перегруженный оператор ввода
+	*/
+	friend std::istream& operator>> (std::istream& in, ModelWindow& m);
+
+	/**
+	* \brief Перегруженный оператор вывода
+	*/
+	friend std::ostream& operator<< (std::ostream& out, const  ModelWindow& m);
 };
